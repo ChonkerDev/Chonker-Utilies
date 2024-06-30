@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f7d113711c01dbc4a8710a283f919b7f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - referenceContainer: {instanceID: 0}
+  - cameraShakeParentContainer: {instanceID: 0}
+  - cameraShakeOneShotContainer: {instanceID: 0}
+  - blankCurveData: {fileID: 11400000, guid: 1681f0d81b3132e4286ff610f94ff4c9, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
