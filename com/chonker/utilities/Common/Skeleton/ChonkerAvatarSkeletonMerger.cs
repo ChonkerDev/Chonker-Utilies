@@ -94,7 +94,6 @@ public class ChonkerAvatarSkeletonMerger : MonoBehaviour
 
             for (int i = 0; i < bones.Length; ++i) {
                 Transform bone = bones[i];
-                Debug.Log(bone.name);
                 if (!targetAvatarBoneMap.TryGetValue(bone.name, out var foundBone)) {
                     // Is the bone the renderer itself?
                     if (bone.name == sren.name) {
