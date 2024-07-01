@@ -1,4 +1,6 @@
 {
 	"name": "com.chonker.utilities",
-	"version" : "0.0.1"
+	"version" : "0.0.1",
+	  "displayName": "Chonker Utilities",
+	  "description": "Some functionalities that I use across mutliple projects",
 }
