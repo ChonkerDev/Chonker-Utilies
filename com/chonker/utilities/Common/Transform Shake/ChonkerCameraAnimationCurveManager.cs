@@ -11,7 +11,6 @@ using UnityEngine.Serialization;
 
 public class ChonkerCameraAnimationCurveManager : MonoBehaviour
 {
-    [SerializeField] private ChonkerFPSComponentReferenceContainer referenceContainer;
     [SerializeField] private Transform cameraShakeParentContainer;
     [SerializeField] private ChonkerAnimationCurvePlayer cameraShakeOneShotContainer;
     [Space]
