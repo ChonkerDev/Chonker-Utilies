@@ -1,7 +1,12 @@
 {
     "name": "chonker.common",
     "rootNamespace": "",
-    "references": ["Unity.TextMeshPro", "Unity.TextMeshPro.Editor", "GUID:406190ab8ee569c46bc05a890e5127a0"],
+    "references": [
+		"Unity.TextMeshPro", 
+		"Unity.TextMeshPro.Editor", 
+		"GUID:406190ab8ee569c46bc05a890e5127a0",
+        "GUID:4c01641db757d0e4f85a4358c823601a"
+		],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
