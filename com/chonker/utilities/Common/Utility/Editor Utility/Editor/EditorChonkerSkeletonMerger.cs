@@ -27,8 +27,13 @@ public class EditorChonkerSkeletonMerger : EditorWindow
 
         if (GUILayout.Button("Merge")) {
             Transform rootBone = skeletonBase.bones[0];
-            Dictionary<string, Transform> baseSkeletonBones = rootBone.GetComponentsInChildren<Transform>()
-                .ToDictionary(skeletonBaseBone => skeletonBaseBone.name);
+            Dictionary<string, Transform> baseSkeletonBones = new();
+            Transform[] baseModelFoundBones = rootBone.GetComponentsInChildren<Transform>();
+                foreach (var baseModelFoundBone in baseModelFoundBones) {
+                    if (!baseSkeletonBones.TryAdd(baseModelFoundBone.name, baseModelFoundBone)) {
+                        Debug.LogWarning($"A Duplicate Bone with name {baseModelFoundBone.name} is already in the bone structure. If this bone is not used by any smr's (for example, if it's an ik target) it most likely can be ignored.");
+                    }
+                }
             Transform[] bones = new Transform[smrToMerge.bones.Length];
             for (var i = 0; i < smrToMerge.bones.Length; i++) {
                 Transform boneToMerge = smrToMerge.bones[i];
