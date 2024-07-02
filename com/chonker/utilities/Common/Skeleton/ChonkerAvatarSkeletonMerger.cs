@@ -55,7 +55,7 @@ public class ChonkerAvatarSkeletonMerger : MonoBehaviour
     /// </summary>
     /// <param name="equipPrefab"></param>
     /// <param name="einfo"></param>
-    public void Equip(GameObject equipPrefab) {
+    public GameObject Equip(GameObject equipPrefab) {
         Debug.Assert(equipPrefab);
 
         // Generate a prefab with cloth set up.
@@ -167,5 +167,6 @@ public class ChonkerAvatarSkeletonMerger : MonoBehaviour
                 cloth.BuildAndRun();
             }
 #endif
+        return gobj;
     }
 }
