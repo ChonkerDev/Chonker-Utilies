@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
 public class EditorChonkerSkeletonMerger : EditorWindow
 {
     private SkinnedMeshRenderer skeletonBase;
@@ -91,3 +92,4 @@ public class EditorChonkerSkeletonMerger : EditorWindow
         throw new Exception();
     }
 }
+#endif

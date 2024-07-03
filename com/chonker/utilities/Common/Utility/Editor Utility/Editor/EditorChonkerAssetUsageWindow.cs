@@ -1,6 +1,7 @@
-using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
 namespace Chonker.Utility.Editor_Utility.Editor
 {
     public class EditorChonkerAssetUsageWindow : EditorWindow
@@ -25,3 +26,5 @@ namespace Chonker.Utility.Editor_Utility.Editor
         }
     }
 }
+
+#endif
