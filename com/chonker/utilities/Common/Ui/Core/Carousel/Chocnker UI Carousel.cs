@@ -9,8 +9,8 @@ using UnityEngine.UI;
 
 public class ChocnkerUICarousel : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textObject;
-    [SerializeField] private TextMeshProUGUI titleObject;
+    [SerializeField, PrefabModeOnly] private TextMeshProUGUI textObject;
+    [SerializeField, PrefabModeOnly] private TextMeshProUGUI titleObject;
     [Space]
     [SerializeField] private Color defaultColor = Color.white;
     [SerializeField] private Color highlightColor = Color.white;

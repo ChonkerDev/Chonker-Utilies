@@ -120,9 +120,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5358635513815542755}
-        m_TargetAssemblyTypeName: ChocnkerUICarousel, Assembly-CSharp
-        m_MethodName: onLeftArrowClick
+      - m_Target: {fileID: 6442262734312137972}
+        m_TargetAssemblyTypeName: ChocnkerUICarousel, chonker.common
+        m_MethodName: onRightArrowClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6036747923815960002}
-  - component: {fileID: 5358635513815542755}
+  - component: {fileID: 6442262734312137972}
   m_Layer: 0
   m_Name: Carousel
   m_TagString: Untagged
@@ -170,7 +170,7 @@ RectTransform:
   m_AnchoredPosition: {x: -44.62915, y: 28.594482}
   m_SizeDelta: {x: 345.8, y: 109.2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5358635513815542755
+--- !u!114 &6442262734312137972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,14 +179,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5951802992035243184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aede22d091a55d41813435addd9639a, type: 3}
+  m_Script: {fileID: 11500000, guid: e86a853d8820d28488b594b5bfb3890c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textObject: {fileID: 9155314498526784238}
   titleObject: {fileID: 2563042268860956224}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  highlightColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
-  clickedColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  clickedColor: {r: 1, g: 1, b: 1, a: 1}
   titleText: 
   onCycleChange:
     m_PersistentCalls:
@@ -311,8 +311,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5358635513815542755}
-        m_TargetAssemblyTypeName: ChocnkerUICarousel, Assembly-CSharp
+      - m_Target: {fileID: 6442262734312137972}
+        m_TargetAssemblyTypeName: ChocnkerUICarousel, chonker.common
         m_MethodName: onRightArrowClick
         m_Mode: 1
         m_Arguments:
