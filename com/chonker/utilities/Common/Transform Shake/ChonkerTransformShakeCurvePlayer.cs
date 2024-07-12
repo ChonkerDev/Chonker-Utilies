@@ -3,9 +3,9 @@ using System.Collections;
 using Chonker.FPS_Controller.Camera.Animation_Curve;
 using UnityEngine;
 
-public class ChonkerAnimationCurvePlayer : MonoBehaviour
+public class ChonkerTransformShakeCurvePlayer : MonoBehaviour
 {
-    [SerializeField] private ChonkerCameraAnimationCurveData sampleCurveData;
+    [SerializeField] private ChonkerTransformShakeCurveData sampleCurveData;
     [SerializeField] private bool testCurveData;
 
     private void Update() {
@@ -15,12 +15,12 @@ public class ChonkerAnimationCurvePlayer : MonoBehaviour
         }
     }
 
-    public void playOneShot(ChonkerCameraAnimationCurveData curveData, float evaluationTime,float positionAmplitudeModifier = 1f, float rotationAmplitudeModifier = 1f) {
+    public void playOneShot(ChonkerTransformShakeCurveData curveData, float evaluationTime,float positionAmplitudeModifier = 1f, float rotationAmplitudeModifier = 1f) {
         StartCoroutine(
             playOneShotCurve(curveData, evaluationTime, positionAmplitudeModifier, rotationAmplitudeModifier));
     }
     
-    private IEnumerator playOneShotCurve(ChonkerCameraAnimationCurveData curveData, float evaluationTime, float positionAmplitudeModifier = 1f, float rotationAmplitudeModifier = 1f) {
+    private IEnumerator playOneShotCurve(ChonkerTransformShakeCurveData curveData, float evaluationTime, float positionAmplitudeModifier = 1f, float rotationAmplitudeModifier = 1f) {
         CurveEvaluation curveEvaluation;
         float timer = 0;
         while (timer < 1) {

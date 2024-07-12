@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 700985047722fe64da08e941be986b4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0188daf643e8ff04987d4cbf3aa5b657, type: 3}
   m_Name: Land - ChonkerCameraAnimationCurveData
   m_EditorClassIdentifier: 
   xPosCurve:
@@ -68,21 +68,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.036231257
-      outSlope: -0.036231257
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.034774438
-    - serializedVersion: 3
-      time: 0.15068036
-      value: -1
-      inSlope: -0.0158948
-      outSlope: -0.0158948
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.092468694
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 0
@@ -93,33 +84,24 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PostInfinity: 1
     m_RotationOrder: 4
-  xRotAmplitudeMultiplier: 0.108
+  xRotAmplitudeMultiplier: 1
   yRotCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.036231257
-      outSlope: -0.036231257
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.034774438
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.24906904
-      value: -0.9987793
-      inSlope: -0.0158948
-      outSlope: -0.0158948
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.092468694
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.53222656
-      value: -0.0011978149
+      time: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -127,6 +109,6 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PostInfinity: 1
     m_RotationOrder: 4
-  yRotAmplitudeMultiplier: 0
+  yRotAmplitudeMultiplier: 1

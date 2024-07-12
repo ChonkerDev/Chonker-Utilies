@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 700985047722fe64da08e941be986b4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0188daf643e8ff04987d4cbf3aa5b657, type: 3}
   m_Name: Sprint - ChonkerCameraAnimationCurveData
   m_EditorClassIdentifier: 
   xPosCurve:
@@ -20,44 +20,35 @@ MonoBehaviour:
       value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 34
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 34
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PostInfinity: 1
     m_RotationOrder: 4
-  xPosAmplitudeMultiplier: 0
+  xPosAmplitudeMultiplier: 1
   yPosCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.020831523
-      outSlope: 0.020831523
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.07692308
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: -0.13623667
-      outSlope: -0.13623667
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 0
@@ -68,30 +59,21 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PostInfinity: 1
     m_RotationOrder: 4
-  yPosAmplitudeMultiplier: 0
+  yPosAmplitudeMultiplier: 1
   xRotCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.020831523
-      outSlope: 0.020831523
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.07692308
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0.026747512
-      outSlope: -0.0023139298
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 0.14880931
-      outWeight: 0.13095903
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 0
@@ -99,12 +81,12 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.08407867
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
-  xRotAmplitudeMultiplier: 0.015
+  xRotAmplitudeMultiplier: 1
   yRotCurve:
     serializedVersion: 2
     m_Curve:
@@ -113,20 +95,20 @@ MonoBehaviour:
       value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 34
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 34
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PostInfinity: 1
     m_RotationOrder: 4
-  yRotAmplitudeMultiplier: 0
+  yRotAmplitudeMultiplier: 1

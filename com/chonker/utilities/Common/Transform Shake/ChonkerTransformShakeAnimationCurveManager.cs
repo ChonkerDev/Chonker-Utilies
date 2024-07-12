@@ -9,15 +9,15 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class ChonkerCameraAnimationCurveManager : MonoBehaviour
+public class ChonkerTransformShakeAnimationCurveManager : MonoBehaviour
 {
     [SerializeField] private Transform cameraShakeParentContainer;
-    [SerializeField] private ChonkerAnimationCurvePlayer cameraShakeOneShotContainer;
+    [SerializeField] private ChonkerTransformShakeCurvePlayer cameraShakeOneShotContainer;
     [Space]
-    [SerializeField] private ChonkerCameraAnimationCurveData blankCurveData;
-    [SerializeField] private ChonkerCameraAnimationCurveData oneShotHitReactionCurve;
+    [SerializeField] private ChonkerTransformShakeCurveData blankCurveData;
+    [SerializeField] private ChonkerTransformShakeCurveData oneShotHitReactionCurve;
     
-    ChonkerCameraAnimationCurveData currentCurveData;
+    ChonkerTransformShakeCurveData currentCurveData;
     private bool isTransitioning;
     private float currentNormalizedTime;
 
@@ -39,7 +39,7 @@ public class ChonkerCameraAnimationCurveManager : MonoBehaviour
         currentNormalizedTime = normalizedTime;
     }
 
-    public void appleOneShotCurve(ChonkerCameraAnimationCurveData curveData, float evaluationTime, float positionAmplitudeModifier, float rotationAmplituideModifer) {
+    public void appleOneShotCurve(ChonkerTransformShakeCurveData curveData, float evaluationTime, float positionAmplitudeModifier, float rotationAmplituideModifer) {
         cameraShakeOneShotContainer.playOneShot(curveData, evaluationTime, positionAmplitudeModifier, rotationAmplituideModifer);
     }
 
@@ -67,12 +67,12 @@ public class ChonkerCameraAnimationCurveManager : MonoBehaviour
     }
 
 
-    public void updateCurve(ChonkerCameraAnimationCurveData newCurve, float transitionTime = .5f) {
+    public void updateCurve(ChonkerTransformShakeCurveData newCurve, float transitionTime = .5f) {
         StopAllCoroutines();
         StartCoroutine(updateCurveCoroutine(newCurve, transitionTime));
     }
 
-    private IEnumerator updateCurveCoroutine(ChonkerCameraAnimationCurveData newCurve, float transitionTime) {
+    private IEnumerator updateCurveCoroutine(ChonkerTransformShakeCurveData newCurve, float transitionTime) {
         isTransitioning = true;
         float timer = 0;
         if (!newCurve) {
@@ -103,7 +103,7 @@ public class ChonkerCameraAnimationCurveManager : MonoBehaviour
 
 #if UNITY_EDITOR
 
-    [CustomEditor(typeof(ChonkerCameraAnimationCurveManager))]
+    [CustomEditor(typeof(ChonkerTransformShakeAnimationCurveManager))]
     public class ChonkerCameraAnimationCurveManagerEditor : Editor
     {
         public override void OnInspectorGUI() {

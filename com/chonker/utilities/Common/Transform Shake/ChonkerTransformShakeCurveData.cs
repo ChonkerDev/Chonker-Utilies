@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Chonker.FPS_Controller.Camera.Animation_Curve
 {
-    public class ChonkerCameraAnimationCurveData : ScriptableObject
+    public class ChonkerTransformShakeCurveData : ScriptableObject
     {
 #if UNITY_EDITOR
-        [MenuItem("Chonker/Create Scriptable Object/Animation/Animation Curve Data")]
+        [MenuItem("Chonker/Create Scriptable Object/Animation/Transform SHake Curve Data")]
         private static void createAnimationCurveData() {
-            ChonkerEditorAssetUtility.createScriptableObject<ChonkerCameraAnimationCurveData>();
+            ChonkerEditorAssetUtility.createScriptableObject<ChonkerTransformShakeCurveData>();
         }
 #endif
         private const float basePositionAmplitude = .1f;
