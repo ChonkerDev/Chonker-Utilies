@@ -36,19 +36,28 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
-  xPosAmplitudeMultiplier: 1
+  xPosAmplitudeMultiplier: 0
   yPosCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.020831523
+      outSlope: 0.020831523
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.07692308
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: -0.13623667
+      outSlope: -0.13623667
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
@@ -59,21 +68,30 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 1
+    m_PostInfinity: 2
     m_RotationOrder: 4
-  yPosAmplitudeMultiplier: 1
+  yPosAmplitudeMultiplier: 0
   xRotCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.020831523
+      outSlope: 0.020831523
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.07692308
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0.026747512
+      outSlope: -0.0023139298
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.14880931
+      outWeight: 0.13095903
     - serializedVersion: 3
       time: 1
       value: 0
@@ -81,12 +99,12 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.08407867
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
-  xRotAmplitudeMultiplier: 1
+  xRotAmplitudeMultiplier: 0.015
   yRotCurve:
     serializedVersion: 2
     m_Curve:
@@ -111,4 +129,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
-  yRotAmplitudeMultiplier: 1
+  yRotAmplitudeMultiplier: 0
