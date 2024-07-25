@@ -122,7 +122,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6442262734312137972}
         m_TargetAssemblyTypeName: ChocnkerUICarousel, chonker.common
-        m_MethodName: onRightArrowClick
+        m_MethodName: onLeftArrowClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
