@@ -1,10 +1,18 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
+#endif
 using UnityEngine;
-
+#if UNITY_EDITOR
 [CustomPropertyDrawer( typeof( PrefabModeOnlyAttribute ) )]
-public class PrefabModeOnlyDrawer : PropertyDrawer
+#endif
+public class PrefabModeOnlyDrawer 
+    #if UNITY_EDITOR
+    : PropertyDrawer
+#endif
 {
+#if UNITY_EDITOR
+
     public override float GetPropertyHeight( SerializedProperty property, GUIContent label )
     {
         return ( PrefabStageUtility.GetCurrentPrefabStage() == null ) ? 0 : EditorGUI.GetPropertyHeight( property, label );
@@ -14,4 +22,5 @@ public class PrefabModeOnlyDrawer : PropertyDrawer
         if ( PrefabStageUtility.GetCurrentPrefabStage() == null ) return;
         EditorGUI.PropertyField( position, property, label );
     }
+    #endif
 }
