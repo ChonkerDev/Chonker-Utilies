@@ -6,6 +6,7 @@ namespace Chonker.Utility.Editor_Utility.Editor
 {
     public class EditorChonkerAssetUsageWindow : EditorWindow
     {
+        private bool OnlyShowUsedAssets;
         private static EditorChonkerAssetUseageDetails[] usageDetailsFound;
         [MenuItem("Chonker/Find Created Asset Usages")]
         private static void showWindow() {
@@ -14,8 +15,21 @@ namespace Chonker.Utility.Editor_Utility.Editor
         }
 
         private void OnGUI() {
+
+            if (OnlyShowUsedAssets) {
+                if (GUILayout.Button("Show All")) {
+                    OnlyShowUsedAssets = false;
+                }
+            }
+            else {
+                if (GUILayout.Button("Show Only Used Assets")) {
+                    OnlyShowUsedAssets = true;
+                }
+            }
+            
             usageDetailsFound = ChonkerEditorAssetUtility.searchForAssetOfTypeInFolder<EditorChonkerAssetUseageDetails>().ToArray();
             foreach (var editorChonkerAssetUseageDetails in usageDetailsFound) {
+                if (OnlyShowUsedAssets && !editorChonkerAssetUseageDetails.IsThisUsed) continue;
                 GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField(editorChonkerAssetUseageDetails.name);
                 GUI.enabled = false;
