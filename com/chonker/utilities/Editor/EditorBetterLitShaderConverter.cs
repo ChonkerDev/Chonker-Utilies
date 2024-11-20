@@ -45,6 +45,7 @@ public class EditorBetterLitShaderConverter : EditorWindow
 
                 Texture sourceAlbedo = sourceMat.GetTexture("_BaseMap");
                 Texture sourceNormal = sourceMat.GetTexture("_BumpMap");
+                Color BaseColor = sourceMat.GetColor("_Color");
                 Material newMat = newBetterLitMats.materials[i];
                 if (!newMat) {
                     Debug.LogWarning($"Target material at index {i} is null. Skipping.");
@@ -53,8 +54,9 @@ public class EditorBetterLitShaderConverter : EditorWindow
 
                 newMat.SetTexture("_AlbedoMap", sourceAlbedo);
                 newMat.SetTexture("_NormalMap", sourceNormal);
+                newMat.SetColor("_Tint", BaseColor);
                 //newMat.GetTexturePropertyNames(); // use this to get property names if need to add a new texture to copy
-
+                
                 RenameMat(ref newMat, sourceMat.name);
                 EditorUtility.SetDirty(newMat);
             }
