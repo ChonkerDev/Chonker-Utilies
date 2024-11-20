@@ -21,49 +21,56 @@ public class EditorBetterLitShaderConverter : EditorWindow
     }
 
     private void OnGUI() {
+        EditorGUILayout.HelpBox("Material Lists must match One to One and must be in the correct order",
+            MessageType.Info);
+        if (GUILayout.Button("Copy Textures")) {
+            CopyTextures();
+        }
+        
         GUILayout.BeginHorizontal();
         displayMats(ref sourceUrpMats, "Source Materials");
         displayMats(ref newBetterLitMats, "New Materials");
 
         GUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Material Lists must match One to One and must be in the correct order",
-            MessageType.Info);
+        
 
-        if (GUILayout.Button("Copy Textures")) {
-            if (sourceUrpMats.materials.Length != newBetterLitMats.materials.Length) {
-                Debug.LogError("Material Lists must be the same length");
-                return;
-            }
 
-            for (var i = 0; i < sourceUrpMats.materials.Length; i++) {
-                Material sourceMat = sourceUrpMats.materials[i];
-                if (!sourceMat) {
-                    Debug.LogWarning($"Source material at index {i} is null. Skipping.");
-                    continue;
-                }
+    }
 
-                Texture sourceAlbedo = sourceMat.GetTexture("_BaseMap");
-                Texture sourceNormal = sourceMat.GetTexture("_BumpMap");
-                Color BaseColor = sourceMat.GetColor("_Color");
-                Material newMat = newBetterLitMats.materials[i];
-                if (!newMat) {
-                    Debug.LogWarning($"Target material at index {i} is null. Skipping.");
-                    continue;
-                }
-
-                newMat.SetTexture("_AlbedoMap", sourceAlbedo);
-                newMat.SetTexture("_NormalMap", sourceNormal);
-                newMat.SetColor("_Tint", BaseColor);
-                //newMat.GetTexturePropertyNames(); // use this to get property names if need to add a new texture to copy
-                
-                RenameMat(ref newMat, sourceMat.name);
-                EditorUtility.SetDirty(newMat);
-            }
-
-            AssetDatabase.Refresh();
-            Debug.Log("Finished Copying Tetures");
+    private void CopyTextures() {
+        if (sourceUrpMats.materials.Length != newBetterLitMats.materials.Length) {
+            Debug.LogError("Material Lists must be the same length");
+            return;
         }
+
+        for (var i = 0; i < sourceUrpMats.materials.Length; i++) {
+            Material sourceMat = sourceUrpMats.materials[i];
+            if (!sourceMat) {
+                Debug.LogWarning($"Source material at index {i} is null. Skipping.");
+                continue;
+            }
+
+            Texture sourceAlbedo = sourceMat.GetTexture("_BaseMap");
+            Texture sourceNormal = sourceMat.GetTexture("_BumpMap");
+            Color BaseColor = sourceMat.GetColor("_Color");
+            Material newMat = newBetterLitMats.materials[i];
+            if (!newMat) {
+                Debug.LogWarning($"Target material at index {i} is null. Skipping.");
+                continue;
+            }
+
+            newMat.SetTexture("_AlbedoMap", sourceAlbedo);
+            newMat.SetTexture("_NormalMap", sourceNormal);
+            newMat.SetColor("_Tint", BaseColor);
+            //newMat.GetTexturePropertyNames(); // use this to get property names if need to add a new texture to copy
+                
+            RenameMat(ref newMat, sourceMat.name);
+            EditorUtility.SetDirty(newMat);
+        }
+
+        AssetDatabase.Refresh();
+        Debug.Log("Finished Copying Tetures");
     }
 
     private void RenameMat(ref Material mat, string newName) {
