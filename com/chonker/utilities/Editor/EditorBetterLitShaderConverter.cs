@@ -54,11 +54,24 @@ public class EditorBetterLitShaderConverter : EditorWindow
                 newMat.SetTexture("_AlbedoMap", sourceAlbedo);
                 newMat.SetTexture("_NormalMap", sourceNormal);
                 //newMat.GetTexturePropertyNames(); // use this to get property names if need to add a new texture to copy
+
+                RenameMat(ref newMat, sourceMat.name);
                 EditorUtility.SetDirty(newMat);
             }
 
-
+            AssetDatabase.Refresh();
             Debug.Log("Finished Copying Tetures");
+        }
+    }
+
+    private void RenameMat(ref Material mat, string newName) {
+        string newPath = AssetDatabase.GetAssetPath(mat);
+        if (!string.IsNullOrEmpty(newPath)) {
+            string result = AssetDatabase.RenameAsset(newPath, newName);
+            if (!string.IsNullOrWhiteSpace(result)) {
+                Debug.LogWarning("Unable to Rename: " + result);
+            }
+            AssetDatabase.SaveAssets();
         }
     }
 
