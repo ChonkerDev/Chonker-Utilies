@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class EditorBetterLitShaderConverter : EditorWindow
 {
@@ -11,34 +13,82 @@ public class EditorBetterLitShaderConverter : EditorWindow
         windows.titleContent = new GUIContent("Better Lit Shader Converter");
     }
 
+
+    private ConversionTypeE ConversionType = ConversionTypeE.OneToOne;
+
+    //One to One mode Props
     private MaterialListWrapper sourceUrpMats;
     private MaterialListWrapper newBetterLitMats;
+
+    //Folder Copy Mode
+    private MaterialWrapper BaseMaterial;
+    private FolderAssetWrapper SourceFolder;
+    private FolderAssetWrapper DestinationFolder;
 
     private void OnEnable() {
         // Create a transient instance of MaterialListWrapper
         sourceUrpMats = ScriptableObject.CreateInstance<MaterialListWrapper>();
         newBetterLitMats = ScriptableObject.CreateInstance<MaterialListWrapper>();
+
+        BaseMaterial = ScriptableObject.CreateInstance<MaterialWrapper>();
+        SourceFolder = ScriptableObject.CreateInstance<FolderAssetWrapper>();
+        DestinationFolder = ScriptableObject.CreateInstance<FolderAssetWrapper>();
     }
 
     private void OnGUI() {
-        EditorGUILayout.HelpBox("Material Lists must match One to One and must be in the correct order",
-            MessageType.Info);
-        if (GUILayout.Button("Copy Textures")) {
-            CopyTextures();
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Folder Copy Mode")) {
+            ConversionType = ConversionTypeE.FolderCopy;
         }
-        
-        GUILayout.BeginHorizontal();
-        displayMats(ref sourceUrpMats, "Source Materials");
-        displayMats(ref newBetterLitMats, "New Materials");
+        else if (GUILayout.Button("Material Property Copy Mode")) {
+            ConversionType = ConversionTypeE.OneToOne;
+        }
 
-        GUILayout.EndHorizontal();
-
-        
+        EditorGUILayout.EndHorizontal();
 
 
+        if (GUILayout.Button("Copy Textures")) {
+            if (ConversionType == ConversionTypeE.OneToOne) {
+                CopyTexturesOneToOne();
+            }
+            else if (ConversionType == ConversionTypeE.FolderCopy) {
+                CopyMatPropertiesToFolder();
+            }
+        }
+
+        switch (ConversionType) {
+            case ConversionTypeE.OneToOne:
+                EditorGUILayout.HelpBox("Material Lists must match One to One and must be in the correct order",
+                    MessageType.Info);
+                GUILayout.BeginHorizontal();
+                displayMats(ref sourceUrpMats, "Source Materials");
+                displayMats(ref newBetterLitMats, "New Materials");
+                GUILayout.EndHorizontal();
+                break;
+            case ConversionTypeE.FolderCopy: {
+                SerializedObject baseMaterialSerializedObject = new SerializedObject(BaseMaterial);
+                SerializedProperty BaseMat = baseMaterialSerializedObject.FindProperty("material");
+                baseMaterialSerializedObject.Update();
+                EditorGUILayout.PropertyField(BaseMat, new GUIContent("Base Better Lit Material"), true);
+                baseMaterialSerializedObject.ApplyModifiedProperties();
+
+                SerializedObject sourceFolderSerializedObject = new SerializedObject(SourceFolder);
+                SerializedProperty sourceFolder = sourceFolderSerializedObject.FindProperty("Folder");
+                sourceFolderSerializedObject.Update();
+                EditorGUILayout.PropertyField(sourceFolder, new GUIContent("Source Folder"), true);
+                sourceFolderSerializedObject.ApplyModifiedProperties();
+
+                SerializedObject destinationFolderSerializedObject = new SerializedObject(DestinationFolder);
+                SerializedProperty destFolder = destinationFolderSerializedObject.FindProperty("Folder");
+                destinationFolderSerializedObject.Update();
+                EditorGUILayout.PropertyField(destFolder, new GUIContent("Destination Folder"), true);
+                destinationFolderSerializedObject.ApplyModifiedProperties();
+                break;
+            }
+        }
     }
 
-    private void CopyTextures() {
+    private void CopyTexturesOneToOne() {
         if (sourceUrpMats.materials.Length != newBetterLitMats.materials.Length) {
             Debug.LogError("Material Lists must be the same length");
             return;
@@ -46,31 +96,78 @@ public class EditorBetterLitShaderConverter : EditorWindow
 
         for (var i = 0; i < sourceUrpMats.materials.Length; i++) {
             Material sourceMat = sourceUrpMats.materials[i];
-            if (!sourceMat) {
-                Debug.LogWarning($"Source material at index {i} is null. Skipping.");
-                continue;
-            }
 
-            Texture sourceAlbedo = sourceMat.GetTexture("_BaseMap");
-            Texture sourceNormal = sourceMat.GetTexture("_BumpMap");
-            Color BaseColor = sourceMat.GetColor("_Color");
-            Material newMat = newBetterLitMats.materials[i];
-            if (!newMat) {
-                Debug.LogWarning($"Target material at index {i} is null. Skipping.");
-                continue;
-            }
+            copyMaterialProps(ref sourceMat, ref newBetterLitMats.materials[i]);
 
-            newMat.SetTexture("_AlbedoMap", sourceAlbedo);
-            newMat.SetTexture("_NormalMap", sourceNormal);
-            newMat.SetColor("_Tint", BaseColor);
             //newMat.GetTexturePropertyNames(); // use this to get property names if need to add a new texture to copy
-                
-            RenameMat(ref newMat, sourceMat.name);
-            EditorUtility.SetDirty(newMat);
         }
 
         AssetDatabase.Refresh();
         Debug.Log("Finished Copying Tetures");
+    }
+
+    private void CopyMatPropertiesToFolder() {
+        if (BaseMaterial == null) {
+            Debug.LogWarning($"Base material is null.");
+            return;
+        }
+
+        if (!AssetDatabase.IsValidFolder(AssetDatabase.GetAssetPath(SourceFolder.Folder))) {
+            Debug.LogWarning("Source Folder is not a valid folder.");
+            return;
+        }
+
+        if (!AssetDatabase.IsValidFolder(AssetDatabase.GetAssetPath(DestinationFolder.Folder))) {
+            Debug.LogWarning("Destination Folder is not a valid folder.");
+            return;
+        }
+
+        string baseMaterialPath = AssetDatabase.GetAssetPath(BaseMaterial.material);
+
+        string sourceFolderPath = AssetDatabase.GetAssetPath(SourceFolder.Folder);
+        string destinationFolderPath = AssetDatabase.GetAssetPath(DestinationFolder.Folder);
+        string[] SourceMaterialGuids = AssetDatabase.FindAssets("t:Material", new[] { sourceFolderPath });
+
+
+        for (var i = 0; i < SourceMaterialGuids.Length; i++) {
+            string SourceMaterialPath = AssetDatabase.GUIDToAssetPath(SourceMaterialGuids[i]);
+            string NewMatPathWithName = Path.Combine(destinationFolderPath,
+                Path.GetFileName(SourceMaterialPath));
+            if (!AssetDatabase.CopyAsset(baseMaterialPath, NewMatPathWithName)) {
+                Debug.LogWarning($"Something went wrong with copying asset {NewMatPathWithName}");
+                continue;
+            }
+
+            AssetDatabase.Refresh();
+            Material sourceMaterial = AssetDatabase.LoadAssetAtPath<Material>(SourceMaterialPath);
+            Material NewMaterial = AssetDatabase.LoadAssetAtPath<Material>(NewMatPathWithName);
+            copyMaterialProps(ref sourceMaterial, ref NewMaterial);
+            Debug.Log($"{NewMaterial.name} Copied.");
+        }
+
+        AssetDatabase.Refresh();
+        AssetDatabase.SaveAssets();
+    }
+
+    private void copyMaterialProps(ref Material source, ref Material New) {
+        if (!source) {
+            Debug.LogWarning($"Source material is null. Skipping.");
+            return;
+        }
+
+        Texture sourceAlbedo = source.GetTexture("_BaseMap");
+        Texture sourceNormal = source.GetTexture("_BumpMap");
+        Color BaseColor = source.GetColor("_Color");
+        if (!New) {
+            Debug.LogWarning($"Target material at is null. Skipping.");
+            return;
+        }
+
+        New.SetTexture("_AlbedoMap", sourceAlbedo);
+        New.SetTexture("_NormalMap", sourceNormal);
+        New.SetColor("_Tint", BaseColor);
+        RenameMat(ref New, source.name);
+        EditorUtility.SetDirty(New);
     }
 
     private void RenameMat(ref Material mat, string newName) {
@@ -80,6 +177,7 @@ public class EditorBetterLitShaderConverter : EditorWindow
             if (!string.IsNullOrWhiteSpace(result)) {
                 Debug.LogWarning("Unable to Rename: " + result);
             }
+
             AssetDatabase.SaveAssets();
         }
     }
@@ -100,5 +198,23 @@ public class EditorBetterLitShaderConverter : EditorWindow
     private class MaterialListWrapper : ScriptableObject
     {
         public Material[] materials;
+    }
+
+    [System.Serializable]
+    private class MaterialWrapper : ScriptableObject
+    {
+        public Material material;
+    }
+
+    [System.Serializable]
+    private class FolderAssetWrapper : ScriptableObject
+    {
+        public DefaultAsset Folder;
+    }
+
+    private enum ConversionTypeE
+    {
+        OneToOne,
+        FolderCopy
     }
 }
