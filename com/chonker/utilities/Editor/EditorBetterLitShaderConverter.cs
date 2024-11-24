@@ -1,10 +1,17 @@
 using System;
 using System.IO;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
-public class EditorBetterLitShaderConverter : EditorWindow
+public class EditorBetterLitShaderConverter 
+    #if UNITY_EDITOR
+    : EditorWindow
+#endif
 {
+    #if UNITY_EDITOR
     [MenuItem("Chonker/Better Lit Shader Converter")]
     public static void ShowWindow() {
         EditorBetterLitShaderConverter windows = GetWindow<EditorBetterLitShaderConverter>();
@@ -215,4 +222,5 @@ public class EditorBetterLitShaderConverter : EditorWindow
         OneToOne,
         FolderCopy
     }
+    #endif
 }
