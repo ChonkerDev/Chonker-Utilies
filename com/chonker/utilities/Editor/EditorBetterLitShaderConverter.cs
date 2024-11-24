@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 public class EditorBetterLitShaderConverter : EditorWindow
 {
@@ -27,12 +25,12 @@ public class EditorBetterLitShaderConverter : EditorWindow
 
     private void OnEnable() {
         // Create a transient instance of MaterialListWrapper
-        sourceUrpMats = ScriptableObject.CreateInstance<MaterialListWrapper>();
-        newBetterLitMats = ScriptableObject.CreateInstance<MaterialListWrapper>();
+        sourceUrpMats = CreateInstance<MaterialListWrapper>();
+        newBetterLitMats = CreateInstance<MaterialListWrapper>();
 
-        BaseMaterial = ScriptableObject.CreateInstance<MaterialWrapper>();
-        SourceFolder = ScriptableObject.CreateInstance<FolderAssetWrapper>();
-        DestinationFolder = ScriptableObject.CreateInstance<FolderAssetWrapper>();
+        BaseMaterial = CreateInstance<MaterialWrapper>();
+        SourceFolder = CreateInstance<FolderAssetWrapper>();
+        DestinationFolder = CreateInstance<FolderAssetWrapper>();
     }
 
     private void OnGUI() {
@@ -194,19 +192,19 @@ public class EditorBetterLitShaderConverter : EditorWindow
         GUILayout.EndVertical();
     }
 
-    [System.Serializable]
+    [Serializable]
     private class MaterialListWrapper : ScriptableObject
     {
         public Material[] materials;
     }
 
-    [System.Serializable]
+    [Serializable]
     private class MaterialWrapper : ScriptableObject
     {
         public Material material;
     }
 
-    [System.Serializable]
+    [Serializable]
     private class FolderAssetWrapper : ScriptableObject
     {
         public DefaultAsset Folder;
