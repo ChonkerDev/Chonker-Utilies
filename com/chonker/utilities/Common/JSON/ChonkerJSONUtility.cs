@@ -15,8 +15,7 @@ public class ChonkerJSONUtility
             return JsonUtility.FromJson<T>(fileContents);
         }
 
-        Debug.LogWarning("Cannot find file at path: " + filePath);
-        return new();
+        throw new FileNotFoundException("Cannot find file at path: " + filePath);
     }
 
     public static void writeFile<T>(string fileName, T jsonData) {
